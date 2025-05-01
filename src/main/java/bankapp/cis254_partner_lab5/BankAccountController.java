@@ -20,6 +20,12 @@ public class BankAccountController
     private Button depositButton;
 
     @FXML
+    private Button withdrawButton;
+
+    @FXML
+    private Button transactionLogButton;
+
+    @FXML
     private Label accountBalance;
 
     @FXML
@@ -70,19 +76,80 @@ public class BankAccountController
                 alert.setContentText("Please select an account before deposit!!!");
                 alert.showAndWait();
             }
-
-//            TextInputDialog inputDialog = new TextInputDialog("amount");
-//            inputDialog.setTitle("Deposit");
-//            inputDialog.setHeaderText("How much money would you like to deposit?");
-//            inputDialog.setContentText("amount:");
-//            Optional<String> result = inputDialog.showAndWait();
-//            result.ifPresent(input->
-//            {
-//                double amount = Double.parseDouble(input);
-//                bankAccountsDropDown.getSelectionModel().getSelectedItem().deposit(amount);
-//            });
+            else
+            {
+                TextInputDialog inputDialog = new TextInputDialog("0");
+                inputDialog.setTitle("Deposit");
+                inputDialog.setHeaderText("How much money would you like to deposit?");
+                inputDialog.setContentText("amount:");
+                Optional<String> result = inputDialog.showAndWait();
+                result.ifPresent(input->
+                {
+                    double amount = Double.parseDouble(input);
+                    bankAccountsDropDown.getSelectionModel().getSelectedItem().deposit(amount);
+                    accountBalance.setText(Double.toString(bankAccountsDropDown.getSelectionModel().getSelectedItem().getBalance()));
+                });
+            }
         }
     }
 
+    @FXML
+    private void onWithdrawButtonClick()
+    {
+        if(bankAccountArrayList.isEmpty())
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("No Account Find");
+            alert.setHeaderText("Must create an account first!!!");
+            alert.setContentText("Please create an account before deposit!!!");
+            alert.showAndWait();
+        }
+        else
+        {
+            if(bankAccountsDropDown.getSelectionModel().getSelectedItem() == null)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Must Select an Account");
+                alert.setHeaderText("Must select an account");
+                alert.setContentText("Please select an account before deposit!!!");
+                alert.showAndWait();
+            }
+            else
+            {
+                TextInputDialog inputDialog = new TextInputDialog("0");
+                inputDialog.setTitle("Deposit");
+                inputDialog.setHeaderText("How much money would you like to deposit?");
+                inputDialog.setContentText("amount:");
+                Optional<String> result = inputDialog.showAndWait();
+                result.ifPresent(input->
+                {
+                    double amount = Double.parseDouble(input);
+                    bankAccountsDropDown.getSelectionModel().getSelectedItem().withdraw(amount);
+                    accountBalance.setText(Double.toString(bankAccountsDropDown.getSelectionModel().getSelectedItem().getBalance()));
+                });
+            }
+        }
+    }
 
+    @FXML
+    private void onTransactionLogButtonClick()
+    {
+
+    }
+
+    private void generateAlert(String errorMsg)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("ERROR");
+        alert.setHeaderText("Malfunction");
+        alert.setContentText(errorMsg);
+    }
+
+    private void generateInfoAlert(String conformation)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Information");
+        alert.setHeaderText("Malfunction");
+        alert.setContentText(conformation);
+    }
 }
