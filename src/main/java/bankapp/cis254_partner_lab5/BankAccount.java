@@ -1,6 +1,7 @@
 package bankapp.cis254_partner_lab5;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 /**
  * Partner_Lab5：Design a BankAccount class with GUI
@@ -28,6 +29,24 @@ public class BankAccount {
     //Create a Calendar object
     Calendar time = Calendar.getInstance();
 
+    //Create a method to get instant time
+    private Date getInstantTime()
+    {
+        return Calendar.getInstance().getTime();
+    }
+
+    private void updateStatement()
+    {
+        String statement = String.format(
+                "%s" +
+                        "\t\tCreating Account" +
+                        "\t\tAccount number : %d" +
+                        "\t\tCurrent balance: %f" +
+                        "\t\tAccount Created\n"
+                ,getInstantTime(),this.accountNumber,this.balance);
+    }
+
+
     //constructor
     /**
      * Default constructor
@@ -36,7 +55,7 @@ public class BankAccount {
     public BankAccount()
     {
         this.balance = 0;//set balance to zero
-        this.statement = new StringBuilder(String.format("%s\t\tCreating Account\t\tAccount number %d\t\tCurrent balance: %f\t\tAccount Created\n",time.getTime(),accountNumber,balance));//update statement
+        this.statement = new StringBuilder(String.format("%s\t\tCreating Account\t\tAccount number %d\t\tCurrent balance: %f\t\tAccount Created\n",getInstantTime(),accountNumber,balance));//update statement
     }
 
     /**
@@ -69,7 +88,7 @@ public class BankAccount {
      * This method will get the Account Number
      * @return the accountNumber
      */
-    public int getAccountNumber()
+    private int getAccountNumber()
     {
         return this.accountNumber;
     }
@@ -81,7 +100,7 @@ public class BankAccount {
      * This method will get the balance
      * @return the balance
      */
-    public double getBalance()
+    private double getBalance()
     {
         return this.balance;
     }
@@ -93,7 +112,7 @@ public class BankAccount {
      * This method will get the statement
      * @return the bank statement
      */
-    public StringBuilder getStatement()
+    private StringBuilder getStatement()
     {
         return statement;
     }
@@ -108,7 +127,7 @@ public class BankAccount {
      *  the correct amount to the balance then add a transaction record to the statement
      * @param amount an int variable
      */
-    public void deposit(double amount)
+    private void deposit(double amount)
     {
         //determine if the transaction is valid(positive) or not(negative)
         if (amount < 0)//if the amount is invalid(negative)
@@ -131,7 +150,7 @@ public class BankAccount {
      *  -if withdraw amount is valid, it will add a transaction to the statement
      * @param amount an int variable
      */
-    public void withdraw(double amount)
+    private void withdraw(double amount)
     {
         if(amount < 0)//if amount is negative
         {

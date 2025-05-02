@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.shape.Rectangle;
 
 import java.util.Optional;
 
@@ -12,6 +13,9 @@ public class BankAccountController
 
 
     ObservableList<BankAccount> bankAccountArrayList = FXCollections.observableArrayList();
+
+    @FXML
+    private Rectangle headerRectangle;
 
     @FXML
     private Button createAccountButton;
@@ -40,6 +44,7 @@ public class BankAccountController
         {
             accountBalance.setText(Double.toString(bankAccountsDropDown.getSelectionModel().getSelectedItem().getBalance()));
         });
+
     }
 
     @FXML
