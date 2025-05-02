@@ -1,6 +1,7 @@
 package bankapp.cis254_partner_lab5;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 /**
  * Partner_Lab5：Design a BankAccount class with GUI
@@ -28,6 +29,24 @@ public class BankAccount {
     //Create a Calendar object
     Calendar time = Calendar.getInstance();
 
+    //Create a method to get instant time
+    private Date getInstantTime()
+    {
+        return Calendar.getInstance().getTime();
+    }
+
+    private void updateStatement()
+    {
+        String statement = String.format(
+                "%s" +
+                        "\t\tCreating Account" +
+                        "\t\tAccount number : %d" +
+                        "\t\tCurrent balance: %f" +
+                        "\t\tAccount Created\n"
+                ,getInstantTime(),this.accountNumber,this.balance);
+    }
+
+
     //constructor
     /**
      * Default constructor
@@ -36,7 +55,7 @@ public class BankAccount {
     public BankAccount()
     {
         this.balance = 0;//set balance to zero
-        this.statement = new StringBuilder(String.format("%s\t\tCreating Account\t\tAccount number %d\t\tCurrent balance: %f\t\tAccount Created\n",time.getTime(),accountNumber,balance));//update statement
+        this.statement = new StringBuilder(String.format("%s\t\tCreating Account\t\tAccount number %d\t\tCurrent balance: %f\t\tAccount Created\n",getInstantTime(),accountNumber,balance));//update statement
     }
 
     /**
@@ -108,18 +127,18 @@ public class BankAccount {
      *  the correct amount to the balance then add a transaction record to the statement
      * @param amount an int variable
      */
-    public void deposit(double amount)
-    {
+    public void deposit(double amount) throws Exception {
         //determine if the transaction is valid(positive) or not(negative)
         if (amount < 0)//if the amount is invalid(negative)
         {
-            this.statement.append(String.format("%s\t\tDeposit: %f\t\t\tAccount Number %d\t\tCurrent Balance: %f\t\tTransaction Incomplete: deposit cannot be negative\n", time.getTime(), amount, this.accountNumber, balance));//print an error message to the statement
+            throw new Exception("The amount of deposit cannot be negative");
+            //this.statement.append(String.format("%s\t\tDeposit: %f\t\t\tAccount Number %d\t\tCurrent Balance: %f\t\tTransaction Incomplete: deposit cannot be negative\n", time.getTime(), amount, this.accountNumber, balance));//print an error message to the statement
         }
         //if the transaction is valid(positive)
         else
         {
             this.balance += amount;//add amount to the balance
-            this.statement.append(String.format("%s\t\tDeposit: %f\t\t\tAccount Number %d\t\tCurrent Balance: %f\t\tTransaction Completed\n", time.getTime(), amount, this.accountNumber, balance));//add a message to the statement
+            //this.statement.append(String.format("%s\t\tDeposit: %f\t\t\tAccount Number %d\t\tCurrent Balance: %f\t\tTransaction Completed\n", time.getTime(), amount, this.accountNumber, balance));//add a message to the statement
         }
     }
 
@@ -131,23 +150,23 @@ public class BankAccount {
      *  -if withdraw amount is valid, it will add a transaction to the statement
      * @param amount an int variable
      */
-    public void withdraw(double amount)
+    public void withdraw(double amount) throws Exception
     {
         if(amount < 0)//if amount is negative
         {
-            this.statement.append(String.format("%s\t\tWithdraw: %f\t\t\tAccount Number %d\t\tCurrent Balance: %f\t\tTransaction Incomplete: cannot withdraw negative amount\n",time.getTime(),amount,this.accountNumber,balance));//add an error message to the statement
+            throw new Exception("The amount of withdraw cannot be negative");
+            //this.statement.append(String.format("%s\t\tWithdraw: %f\t\t\tAccount Number %d\t\tCurrent Balance: %f\t\tTransaction Incomplete: cannot withdraw negative amount\n",time.getTime(),amount,this.accountNumber,balance));//add an error message to the statement
         }
-        else//if amount is positive
+        else if(amount < this.getBalance())
         {
-            if(this.getBalance() > amount)//if the balance is greater than withdraw amount
-            {
-                this.balance -= amount;//withdraw money from balance
-                this.statement.append(String.format("%s\t\tWithdraw: %f\t\t\tAccount Number %d\t\tCurrent Balance: %f\t\tTransaction Completed\n",time.getTime(),amount,this.accountNumber,balance));//transaction completed
-            }
-            else//if the balance is less than withdraw amount
-            {
-                this.statement.append(String.format("%s\t\tWithdraw: %f\t\t\tAccount Number %d\t\tCurrent Balance: %f\t\tTransaction Incomplete: Not enough balance\n",time.getTime(),amount,this.accountNumber,balance));//print an error message
-            }
+            //this.statement.append(String.format("%s\t\tWithdraw: %f\t\t\tAccount Number %d\t\tCurrent Balance: %f\t\tTransaction Incomplete: Not enough balance\n",time.getTime(),amount,this.accountNumber,balance));//print an error message
+            throw new Exception("Insufficient fund");
+        }
+        else
+        {
+            this.balance -= amount;//withdraw money from balance
+            this.statement.append(String.format("%s\t\tWithdraw: %f\t\t\tAccount Number %d\t\tCurrent Balance: %f\t\tTransaction Completed\n",time.getTime(),amount,this.accountNumber,balance));//transaction completed
+
         }
     }
 
