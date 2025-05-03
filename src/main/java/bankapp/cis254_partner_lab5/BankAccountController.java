@@ -75,17 +75,18 @@ public class BankAccountController
         }
         else
         {
-            TextInputDialog inputDialog = new TextInputDialog("0");
-            inputDialog.setTitle("Deposit");
-            inputDialog.setHeaderText("How much money would you like to deposit?");
-            inputDialog.setContentText("amount:");
-            Optional<String> result = inputDialog.showAndWait();
-            result.ifPresent(input->
-            {
-                double amount = Double.parseDouble(input);
-                // bankAccountsDropDown.getSelectionModel().getSelectedItem().deposit(amount);
-                accountBalance.setText(Double.toString(bankAccountsDropDown.getSelectionModel().getSelectedItem().getBalance()));
-            });
+//            TextInputDialog inputDialog = new TextInputDialog("0");
+//            inputDialog.setTitle("Deposit");
+//            inputDialog.setHeaderText("How much money would you like to deposit?");
+//            inputDialog.setContentText("amount:");
+//            Optional<String> result = inputDialog.showAndWait();
+//            result.ifPresent(input->
+//            {
+//                double amount = Double.parseDouble(input);
+//                // bankAccountsDropDown.getSelectionModel().getSelectedItem().deposit(amount);
+//                accountBalance.setText(Double.toString(bankAccountsDropDown.getSelectionModel().getSelectedItem().getBalance()));
+//            });
+            account.deposit(generateInputBox("a","a","a"));
         }
     }
 
@@ -170,11 +171,15 @@ public class BankAccountController
         }
         else
         {
-//            try
-//            {
-//                return Double.parseDouble(result.get());
-//            }
-//            catch (Exception)
+            try
+            {
+                return Double.parseDouble(result.get());
+            }
+            catch (NumberFormatException e)
+            {
+                System.out.println("123");
+                return 100.0;
+            }
         }
 
 

@@ -1,6 +1,7 @@
 package bankapp.cis254_partner_lab5;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 /**
  * Partner_Lab5：Design a BankAccount class with GUI
@@ -27,6 +28,11 @@ public class BankAccount {
 
     //Create a Calendar object
     Calendar time = Calendar.getInstance();
+
+    private Date timeStamp()
+    {
+        return Calendar.getInstance().getTime();
+    }
 
     //constructor
     /**
