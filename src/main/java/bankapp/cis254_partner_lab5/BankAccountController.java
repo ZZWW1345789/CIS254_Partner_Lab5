@@ -153,7 +153,7 @@ public class BankAccountController
         alert.showAndWait();
     }
 
-    private double generateInputBox(String title, String header, String content)
+    private void generateInputBox(String title, String header, String content)
     {
         TextInputDialog inputDialog = new TextInputDialog("0");
 
@@ -167,7 +167,7 @@ public class BankAccountController
             generateAlert("Error",
                         "Invalid input: Empty input",
                         "Must enter an valid value");
-            return 0.0;
+            //return 0.0;
         }
         else
         {
