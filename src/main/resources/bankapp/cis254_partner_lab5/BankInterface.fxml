@@ -6,8 +6,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
@@ -19,64 +17,54 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="802.0" style="-fx-background-color: radial-gradient(focus-angle 0.0deg, focus-distance 0.0% , center 52.214% 50.0%, radius 77.4809%, #d7c9c9 0.0%, #b6bfd9 100.0%);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bankapp.cis254_partner_lab5.BankAccountController">
-   <Line endX="40.0" endY="80.0" layoutY="-10.5" startX="802.0" startY="80.0" AnchorPane.topAnchor="69.0" />
-   <StackPane layoutX="15.0" layoutY="19.0">
-      <Circle fill="#255079" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
-      <Arc fill="DODGERBLUE" length="270.0" radiusX="32.0" radiusY="30.0" startAngle="45.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
-   </StackPane>
-   <Line endX="50.0" endY="49.0000114440918" startX="14.999995231628418" startY="49.000003814697266" />
-   <VBox layoutX="82.0" layoutY="12.0">
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RICH BANK" wrappingWidth="299.47007179260254">
-         <font>
-            <Font name="Sitka Subheading" size="48.0" />
-         </font>
-      </Text>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Since 2025">
-         <font>
-            <Font name="Sitka Heading" size="12.0" />
-         </font>
-      </Text>
-   </VBox>
-   <Text layoutX="522.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account number" wrappingWidth="140.0" AnchorPane.topAnchor="75.0">
-      <font>
-         <Font name="Cambria Math" size="17.0" />
-      </font>
-   </Text>
-   <ComboBox fx:id="bankAccountsDropDown" layoutX="650.0" layoutY="25.0" prefHeight="33.0" prefWidth="154.0" promptText="Select Your Account" />
-   <Text layoutX="522.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account balance: " wrappingWidth="140.0" AnchorPane.topAnchor="35.0">
-      <font>
-         <Font name="Cambria Math" size="17.0" />
-      </font>
-   </Text>
-   <Label fx:id="accountBalance" layoutX="665.0" layoutY="72.33333333333333" prefHeight="25.0" prefWidth="123.0" text="0.00" AnchorPane.topAnchor="72.0">
-      <font>
-         <Font name="Cambria Math" size="17.0" />
-      </font>
-   </Label>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="1.0" layoutY="97.0" stroke="DODGERBLUE" strokeType="INSIDE" width="802.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="97.0">
-      <effect>
-         <Blend mode="DIFFERENCE" opacity="0.27" />
-      </effect>
-      <fill>
-         <LinearGradient endX="0.33438476177420146" endY="0.044164013787398954" startX="0.33438487759900026" startY="1.0">
-            <stops>
-               <Stop>
-                  <color>
-                     <Color red="0.22745098173618317" green="0.6666666865348816" blue="0.9843137264251709" />
-                  </color>
-               </Stop>
-               <Stop offset="1.0">
-                  <color>
-                     <Color red="0.8367446660995483" green="0.8705734014511108" blue="0.8947368264198303" />
-                  </color>
-               </Stop>
-            </stops>
-         </LinearGradient>
-      </fill>
-      <cursor>
-         <Cursor fx:constant="DEFAULT" />
-      </cursor>
-   </Rectangle>
+   <AnchorPane layoutY="4.0" prefHeight="174.0" prefWidth="771.0">
+      <children>
+         <Circle fill="#255079" layoutX="37.0" layoutY="40.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="781.3333333333334" AnchorPane.topAnchor="13.0" />
+         <Line endX="1580.0" endY="80.0" layoutX="39.5" layoutY="41.0" startX="802.0" startY="80.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="55.0" />
+         <Arc fill="DODGERBLUE" layoutX="41.0" layoutY="21.0" length="270.0" radiusX="32.0" radiusY="30.0" startAngle="45.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="780.0" AnchorPane.topAnchor="10.0" />
+         <Line endX="32.3333740234375" endY="48.999996185302734" layoutX="13.0" layoutY="-9.0" startX="-3.0" startY="48.999996185302734" AnchorPane.leftAnchor="9.5" AnchorPane.rightAnchor="799.6666259765625" AnchorPane.topAnchor="39.499996185302734" />
+         <Text layoutX="522.0" layoutY="16.333332061767578" strokeType="OUTSIDE" strokeWidth="0.0" text="Account number" wrappingWidth="140.0" AnchorPane.leftAnchor="522.0" AnchorPane.rightAnchor="183.33333333333337" AnchorPane.topAnchor="30.0">
+            <font>
+               <Font name="Cambria Math" size="17.0" />
+            </font>
+         </Text>
+         <ComboBox fx:id="bankAccountsDropDown" layoutX="650.0" layoutY="6.333333969116211" prefHeight="33.0" prefWidth="154.0" promptText="Select Your Account" AnchorPane.leftAnchor="650.0" AnchorPane.rightAnchor="41.33333333333337" AnchorPane.topAnchor="20.0" />
+         <Text layoutX="522.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account balance: " wrappingWidth="140.0" AnchorPane.leftAnchor="522.0" AnchorPane.rightAnchor="183.33333333333337" AnchorPane.topAnchor="58.0">
+            <font>
+               <Font name="Cambria Math" size="17.0" />
+            </font>
+         </Text>
+         <Label fx:id="accountBalance" layoutX="665.0" layoutY="46.333335876464844" prefHeight="25.0" prefWidth="123.0" text="---" AnchorPane.leftAnchor="665.0" AnchorPane.rightAnchor="56.66666666666667" AnchorPane.topAnchor="53.0">
+            <font>
+               <Font name="Cambria Math" size="17.0" />
+            </font>
+         </Label>
+         <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutY="78.0" stroke="DODGERBLUE" strokeType="INSIDE" width="802.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+            <effect>
+               <Blend mode="DIFFERENCE" opacity="0.27" />
+            </effect>
+            <fill>
+               <LinearGradient endX="0.33438476177420146" endY="0.044164013787398954" startX="0.33438487759900026" startY="1.0">
+                  <stops>
+                     <Stop>
+                        <color>
+                           <Color red="0.22745098173618317" green="0.6666666865348816" blue="0.9843137264251709" />
+                        </color>
+                     </Stop>
+                     <Stop offset="1.0">
+                        <color>
+                           <Color red="0.8367446660995483" green="0.8705734014511108" blue="0.8947368264198303" />
+                        </color>
+                     </Stop>
+                  </stops>
+               </LinearGradient>
+            </fill>
+            <cursor>
+               <Cursor fx:constant="DEFAULT" />
+            </cursor>
+         </Rectangle>
+      </children>
+   </AnchorPane>
    <Button fx:id="createAccountButton" cache="true" layoutX="282.0" layoutY="227.0" mnemonicParsing="false" onAction="#onCreateAccountButtonClick" prefHeight="34.0" prefWidth="238.0" style="-fx-background-color: radial-gradient(focus-angle 0.0deg, focus-distance 0.0% , center 52.214% 50.0%, radius 77.4809%, #3aaafb 0.0%, #1f5982 100.0%); -fx-border-color: black;" text="Create Account" AnchorPane.topAnchor="220.0">
       <font>
          <Font name="Cambria Math" size="24.0" />
@@ -97,4 +85,14 @@
          <Font name="Cambria Math" size="24.0" />
       </font>
    </Button>
+   <Text layoutX="82.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Since 2025" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="420.52992820739746" AnchorPane.topAnchor="60.0">
+      <font>
+         <Font name="Sitka Heading" size="12.0" />
+      </font>
+   </Text>
+   <Text layoutX="82.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RICH BANK" wrappingWidth="299.47007179260254" AnchorPane.bottomAnchor="581.3306655883789" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="420.52992820739746" AnchorPane.topAnchor="20.0">
+      <font>
+         <Font name="Sitka Subheading" size="48.0" />
+      </font>
+   </Text>
 </AnchorPane>

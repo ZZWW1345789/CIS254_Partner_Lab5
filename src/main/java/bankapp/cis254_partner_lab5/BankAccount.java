@@ -8,9 +8,6 @@ import java.util.Random;
  *
  * @author Z Wang
  * @since 4/27/2025
- */
-
-/**
  * The BankAccount class:
  *      Declare an instance variable to hold the account number.
  *      Declare an instance variable to hold the balance in the account.
@@ -26,13 +23,6 @@ public class BankAccount {
     //create a Random object
     Random rand = new Random();
 
-    //Create a Calendar object
-    Calendar time = Calendar.getInstance();
-
-    private Date timeStamp()
-    {
-        return Calendar.getInstance().getTime();
-    }
 
     //constructor
     /**
@@ -42,7 +32,7 @@ public class BankAccount {
     public BankAccount()
     {
         this.balance = 0;//set balance to zero
-        this.statement = new StringBuilder(String.format("%s\t\tCreating Account\t\tAccount number %d\t\tCurrent balance: %f\t\tAccount Created\n",time.getTime(),accountNumber,balance));//update statement
+        this.statement = new StringBuilder(String.format("%s\t\t\tCreating Account\t\t\tAccount number %d\t\t\t\tCurrent balance: %.2f\t\t\tAccount Created\n",getCurrentTime(),this.accountNumber,this.balance));//update statement
     }
 
     /**
@@ -53,7 +43,7 @@ public class BankAccount {
     public BankAccount(double balance)
     {
         this.balance = balance;//set the balance to param value
-        this.statement = new StringBuilder(String.format("%s\t\tCreating Account\t\tAccount number %d\t\tCurrent balance: %f\t\tAccount Created\n",time.getTime(),accountNumber,balance));//update statement
+        this.statement = new StringBuilder(String.format("%s\t\t\tCreating Account\t\t\t\tAccount number %d\t\t\tCurrent balance: %.2f\t\t\tAccount Created\n",getCurrentTime(),this.accountNumber,this.balance));//update statement
     }
 
 
@@ -65,10 +55,20 @@ public class BankAccount {
 
     private double balance;//balance
 
-    private StringBuilder statement;//statement
+    private final StringBuilder statement;//statement
 
 
     //gets and sets
+
+    //time
+    /**
+     * This method will get current time
+     * @return a Date object
+     */
+    private Date getCurrentTime()
+    {
+        return Calendar.getInstance().getTime();
+    }
 
     //accountNumber
     /**
@@ -82,7 +82,6 @@ public class BankAccount {
 
 
     //balance
-
     /**
      * This method will get the balance
      * @return the balance
@@ -94,7 +93,6 @@ public class BankAccount {
 
 
     //statement
-
     /**
      * This method will get the statement
      * @return the bank statement
@@ -106,61 +104,84 @@ public class BankAccount {
 
 
     //method
-
     /**
      * This method will deposit money to the balance
-     *      -if the param is negative, balance will remain unchanged, add an error message to statement
+     *      -if the param is negative, balance will remain unchanged, and throw an Exception
      *      -if the param is positive, it's a valid transaction, it will add
      *  the correct amount to the balance then add a transaction record to the statement
-     * @param amount an int variable
+     * @param amount a double variable
      */
-    public void deposit(double amount)
+    public void deposit(double amount) throws Exception
     {
         //determine if the transaction is valid(positive) or not(negative)
-        if (amount < 0)//if the amount is invalid(negative)
+        if (amount <= 0)//if the amount is invalid(negative)
         {
-            this.statement.append(String.format("%s\t\tDeposit: %f\t\t\tAccount Number %d\t\tCurrent Balance: %f\t\tTransaction Incomplete: deposit cannot be negative\n", time.getTime(), amount, this.accountNumber, balance));//print an error message to the statement
+            addStatement("Deposit",amount,false);
+            throw new Exception("amount can't be negative or zero");
         }
         //if the transaction is valid(positive)
         else
         {
             this.balance += amount;//add amount to the balance
-            this.statement.append(String.format("%s\t\tDeposit: %f\t\t\tAccount Number %d\t\tCurrent Balance: %f\t\tTransaction Completed\n", time.getTime(), amount, this.accountNumber, balance));//add a message to the statement
+            addStatement("Deposit",amount,true);
         }
     }
 
 
     /**
      * This method will withdraw money from the balance
-     *  -withdraw cannot be negative
-     *  -withdraw amount cannot be greater than current balance
+     *  -withdraw cannot be negative(throw IllegalArgumentException)
+     *  -withdraw amount cannot be greater than current balance(throw IllegalStateException)
      *  -if withdraw amount is valid, it will add a transaction to the statement
-     * @param amount an int variable
+     * @param amount a double variable
      */
-    public void withdraw(double amount)
-    {
-        if(amount < 0)//if amount is negative
+    public void withdraw(double amount) {
+        if(amount <= 0)//if amount is negative
         {
-            this.statement.append(String.format("%s\t\tWithdraw: %f\t\t\tAccount Number %d\t\tCurrent Balance: %f\t\tTransaction Incomplete: cannot withdraw negative amount\n",time.getTime(),amount,this.accountNumber,balance));//add an error message to the statement
+            addStatement("Withdraw",amount,false);
+            throw new IllegalArgumentException("amount can't be negative or zero");
         }
-        else//if amount is positive
+        else if (amount > this.getBalance()) {
+            addStatement("Withdraw",amount,false);
+            throw new IllegalStateException("Insufficient Funds");
+        }
+        else
         {
-            if(this.getBalance() > amount)//if the balance is greater than withdraw amount
-            {
-                this.balance -= amount;//withdraw money from balance
-                this.statement.append(String.format("%s\t\tWithdraw: %f\t\t\tAccount Number %d\t\tCurrent Balance: %f\t\tTransaction Completed\n",time.getTime(),amount,this.accountNumber,balance));//transaction completed
-            }
-            else//if the balance is less than withdraw amount
-            {
-                this.statement.append(String.format("%s\t\tWithdraw: %f\t\t\tAccount Number %d\t\tCurrent Balance: %f\t\tTransaction Incomplete: Not enough balance\n",time.getTime(),amount,this.accountNumber,balance));//print an error message
-            }
+            this.balance -= amount;//withdraw money from balance
+            addStatement("Withdraw",amount,true);
         }
     }
 
+    /**
+     * This method will add the statement information to the bankStatement
+     * @param userAction a String(Deposit or Withdraw)
+     * @param amount a double variable
+     * @param isTransactionComplete a bool(true = transaction complete, false = incomplete)
+     */
+    private void addStatement(String userAction, double amount, boolean isTransactionComplete)
+    {
+        this.statement.append(String.format("%s\t\t\t",getCurrentTime()));//show time
+        this.statement.append(String.format("%s: %.2f\t\t\t",userAction,amount));//show action text
+        this.statement.append(String.format("Account Number: %d\t\t\t",this.accountNumber));//show acc number
+        this.statement.append(String.format("Current Balance: %.2f\t\t\t",this.balance));//show balance
+        if (isTransactionComplete)
+        {
+            this.statement.append("Transaction Complete\n");//show status
+        }
+        else
+        {
+            this.statement.append("Transaction Incomplete\n");//show status
+        }
+    }
+
+
     @Override
+    /**
+     * Override toString to convert memory address to account number
+     */
     public String toString()
     {
-        return Integer.toString(getAccountNumber());
+        return Integer.toString(getAccountNumber());//convert memory address to account number
     }
 
 }
