@@ -170,20 +170,20 @@ public class BankAccountController
         }
         else
         {
-            try
-            {
-                return Double.parseDouble(result.get());
-            }
-            catch (Exception)
+//            try
+//            {
+//                return Double.parseDouble(result.get());
+//            }
+//            catch (Exception)
         }
 
 
-        result.ifPresent(input->
-        {
-//            double amount = Double.parseDouble(input);
-//            // bankAccountsDropDown.getSelectionModel().getSelectedItem().deposit(amount);
-//            accountBalance.setText(Double.toString(bankAccountsDropDown.getSelectionModel().getSelectedItem().getBalance()));
-        });
+//        result.ifPresent(input->
+//        {
+////            double amount = Double.parseDouble(input);
+////            // bankAccountsDropDown.getSelectionModel().getSelectedItem().deposit(amount);
+////            accountBalance.setText(Double.toString(bankAccountsDropDown.getSelectionModel().getSelectedItem().getBalance()));
+//        });
     }
 
 }
